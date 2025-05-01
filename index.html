@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainstorming Scroll</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f9f9f9;
+    }
+    .section {
+      padding: 100px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid #ddd;
+    }
+    .illustration {
+      font-weight: bold;
+      font-size: 1.3em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .text {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #444;
+    }
+    .image-placeholder {
+      width: 100%;
+      height: 200px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      color: #666;
+      border-radius: 10px;
+    }
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+    .scroll-fade.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Sections will be injected here -->
+  </div>
+
+  <script>
+    const content = [
+      {
+        illustration: "1. The Invitation",
+        text: "Can creativity be taught? How do we come up with a really innovative idea? What is the best method for generating ideas? For many, the answer to these problems is brainstorming. But does it work to solve problems or come up with new ideas?"
+      },
+      {
+        illustration: "2. The Brainstorm Begins",
+        text: "Brainstorming is used most frequently to generate as many solutions to a particular problem as possible because quantity is favoured over quality. The basic assumption is that ‘two heads are better than one’ and that together, in groups, innovative solutions can be found."
+      },
+      {
+        illustration: "3. The Rules",
+        text: "There are guidelines: Group size should be about five to seven people. No criticism allowed. Freewheeling is encouraged. Quantity and variety is also favoured. Encourage combinations and improvements. Notes must be taken."
+      },
+      {
+        illustration: "4. The Doubts Creep In",
+        text: "(a) The fear that group members experience of their ideas being negatively evaluated by their peers; that is, evaluation apprehension."
+      },
+      {
+        illustration: "5. Too Many Voices",
+        text: "(b) The difficulty of simultaneously listening to the ideas of others and thinking of one’s own ideas; that is, production blocking."
+      },
+      {
+        illustration: "6. Why Bother?",
+        text: "(c) The tendency of people to put less effort into carrying out a task when they work in group settings; that is, social loafing."
+      },
+      {
+        illustration: "7. The Joy of It",
+        text: "Individuals brainstorming in groups often report that they have lots of fun trying to find new ways to improve their jobs."
+      },
+      {
+        illustration: "8. Cognitive Stimulation",
+        text: "People generating ideas in group settings seem to experience a condition of cognitive stimulation, which actually facilitates the generation of a higher quantity and quality of novel ideas."
+      },
+      {
+        illustration: "9. Groups vs Individuals",
+        text: "It was found that the average accuracy of groups of five persons working together was greater than the average accuracy of five individuals working alone. However, it was also found that groups were substantially slower (as much as 40 per cent) than individuals in reaching solutions."
+      },
+      {
+        illustration: "10. Pooling of Ignorance",
+        text: "Two heads may be better than one only when neither is a blockhead — the ‘pooling of ignorance’ does not help at all."
+      },
+      {
+        illustration: "11. The Paperclip Problem",
+        text: "Other poorly structured tasks include: coming up with a new product name, image or logo; or finding new or original uses for familiar objects like a coat-hanger, paper clip or brick."
+      },
+      {
+        illustration: "12. Going Blind",
+        text: "In one study, people were given 35 minutes to consider the consequences of everybody suddenly going blind... Individuals were far more productive than groups and arrived at their answers much faster."
+      },
+      {
+        illustration: "13. Misused Magic",
+        text: "In other words, brainstorming is used when it is least effective, and rarely when it is most effective."
+      },
+      {
+        illustration: "14. The Written Fix",
+        text: "These techniques are usually referred to as ‘brainwriting’ and aim at limiting the production blocking that occurs in brainstorming groups."
+      },
+      {
+        illustration: "15. The Digital Upgrade",
+        text: "Brainstorming is also performed in ‘electronic brainstorming groups’, in which case the interaction among group members is taking place through computers, eliminating any oral communication."
+      },
+      {
+        illustration: "16. The Verdict",
+        text: "The paradox of brainstorming is that this technique is most frequently used when research suggests it is least effective. Even though it’s popular and enjoyable, group interaction often inhibits the sharing of novel ideas."
+      }
+    ];
+
+    const container = document.getElementById('container');
+    content.forEach(item => {
+      const section = document.createElement('div');
+      section.classList.add('section', 'scroll-fade');
+      section.innerHTML = `
+        <div class="image-placeholder">[ Illustration Placeholder: ${item.illustration} ]</div>
+        <div class="illustration">${item.illustration}</div>
+        <div class="text">${item.text}</div>
+      `;
+      container.appendChild(section);
+    });
+
+    // Intersection Observer for fade-in effect
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.scroll-fade').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
