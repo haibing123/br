@@ -13,24 +13,24 @@
     .section {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      padding: 80px 20px;
+      height: 100vh;
       max-width: 1100px;
       margin: 0 auto;
-      border-bottom: 1px solid #ddd;
+      padding: 0 20px;
       gap: 40px;
       opacity: 0;
-      transform: translateY(60px) scale(0.95);
+      transform: translateY(80px) scale(0.9);
       transition: opacity 1s ease-out, transform 1s ease-out;
     }
     .section.visible {
       opacity: 1;
-      transform: none;
+      transform: translateY(0) scale(1);
     }
     .image-placeholder {
       width: 40%;
-      height: 200px;
+      height: 300px;
       background: #ddd;
       display: flex;
       align-items: center;
@@ -39,6 +39,13 @@
       color: #666;
       border-radius: 10px;
       flex-shrink: 0;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s ease-out;
+    }
+    .section.visible .image-placeholder {
+      transform: translateY(0);
+      opacity: 1;
     }
     .text-block {
       width: 60%;
@@ -57,6 +64,7 @@
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
+        text-align: center;
       }
       .image-placeholder, .text-block {
         width: 100%;
@@ -92,7 +100,7 @@
       const section = document.createElement('div');
       section.classList.add('section');
       section.innerHTML = `
-        <div class="image-placeholder">[ Illustration Placeholder: ${item.illustration} ]</div>
+        <div class="image-placeholder">[ Illustration: ${item.illustration} ]</div>
         <div class="text-block">
           <div class="illustration">${item.illustration}</div>
           <div class="text">${item.text}</div>
